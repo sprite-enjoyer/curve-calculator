@@ -1,7 +1,8 @@
-from approximation_strategy import ApproximationStrategy
+from matplotlib import pyplot as plt
 import numpy as np
+from . import approximation_strategy
 
-class LeastSquaresApproximation(ApproximationStrategy):
+class LeastSquaresApproximation(approximation_strategy.ApproximationStrategy):
   def __init__(self):
     pass
 
@@ -15,6 +16,17 @@ class LeastSquaresApproximation(ApproximationStrategy):
     right = np.matmul(left, right)
     return [right[1], right[0]]
 
-
-
-
+  def draw(self, a, b):
+    x = np.linspace(-10, 10, 100)
+    y = a * x + b
+    plt.plot(x, y)
+    
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.title(f'Linear Function: {a}x + {b}')
+    plt.legend()
+    
+    plt.grid(True)
+    plt.axhline(0, color='black',linewidth=0.5)
+    plt.axvline(0, color='black',linewidth=0.5)
+    plt.show()

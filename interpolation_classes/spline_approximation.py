@@ -1,7 +1,9 @@
-from approximation_strategy import ApproximationStrategy
+from matplotlib import pyplot as plt
 import numpy as np
+from . import approximation_strategy
 
-class SplineApproximation(ApproximationStrategy):
+
+class SplineApproximation(approximation_strategy.ApproximationStrategy):
   
   def __init__(self):
     self.cubicPolynomialArr = []
@@ -34,6 +36,23 @@ class SplineApproximation(ApproximationStrategy):
         b[j] = (y_arr[j + 1] - y_arr[j]) / h[j] - h[j] * (c[j + 1] + 2 * c[j]) / 3
         d[j] = (c[j + 1] - c[j]) / (3 * h[j])
 
-    coefficients = [[y_arr[i], b[i], c[i], d[i]] for i in range(n)]
-    return coefficients
+    coefficients_arr = [[y_arr[i], b[i], c[i], d[i]] for i in range(n)]
+    return coefficients_arr
 
+  def draw(self, coefficients_arr):
+    x = np.linspace(-10, 10, 100)
+
+    for coefficients in coefficients_arr:
+      a, b, c, d = coefficients
+      y = a * x**3 + b * x**2 + c * x + d
+      plt.plot(x, y, label=f'{a}x^3 + {b}x^2 + {c}x + {d}')
+
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.title('Cubic Functions')
+    plt.legend()
+    
+    plt.grid(True)
+    plt.axhline(0, color='black', linewidth=0.5)
+    plt.axvline(0, color='black', linewidth=0.5)
+    plt.show()

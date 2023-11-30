@@ -1,6 +1,6 @@
 from PIL import Image
 
-class ImageManager: 
+class ImageProcessor: 
 
   def __init__(self, path: str):
     self.path = path

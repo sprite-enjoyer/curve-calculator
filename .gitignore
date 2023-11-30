@@ -2,7 +2,6 @@ photos
 cp1.pdf
 __pycache__
 files
-__pycache__/Image_processor.cpython-311.pyc
 test1.py
 ./test1.py
 test1.py
